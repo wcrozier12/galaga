@@ -10,27 +10,15 @@ export function getConfig() {
       coinbaseWallet({
         appName: "My Sub Account Demo",
         preference: {
-          keysUrl: "https://keys-dev.coinbase.com/connect",
+          keysUrl: "https://scw-dev.cbhq.net/connect",
           options: "smartWalletOnly",
         },
         subAccounts: {
           enableAutoSubAccounts: true,
-          defaultSpendLimits: {
-            84532: [
-              {
-                token: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
-                allowance: toHex(parseEther('0.01')),
-                period: 86400,
-              },
-            ],
-            8453: [
-              {
-                token: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
-                allowance: toHex(parseEther('0.01')),
-                period: 86400,
-              },
-            ],
-          },
+        },
+        paymasterUrls: {
+          [baseSepolia.id]: "https://api.developer.coinbase.com/rpc/v1/base/Rd8EVaLBQ9hFOtp3Dz3R9ffnxCZQC2DC",
+          [base.id]: "https://scw-dev.cbhq.net/paymaster",
         },
       }),
     ],

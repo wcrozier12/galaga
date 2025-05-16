@@ -1,67 +1,60 @@
 'use client'
 
-import { parseEther } from 'viem'
-import { useAccount, useConnect, useDisconnect, useSendTransaction, useSignMessage } from 'wagmi'
+import './globals.css'
+// parseEther is not used directly here anymore after user removed Send Transaction button
+// import { parseEther } from 'viem' 
+// useAccount, useConnect, useDisconnect are now primarily used in Navbar.tsx
+// useSendTransaction, useSignMessage were part of sections user removed.
+// import { useAccount, useConnect, useDisconnect, useSendTransaction, useSignMessage } from 'wagmi'
+import { MiniGame } from './MiniGame'
+import { Navbar } from './Navbar' // Import Navbar
 
 function App() {
-  const account = useAccount()
-  const { connectors, connect, status, error } = useConnect()
-  const { disconnect } = useDisconnect()
-  const { sendTransactionAsync, data } = useSendTransaction()
-  const { signMessage, data: signData } = useSignMessage()
+  // Account info, connect/disconnect buttons, and related hooks (account, connectors, connect, disconnect, status, error)
+  // have been moved to the Navbar component.
+  // Send Transaction and Sign Message sections and their hooks (sendTransactionAsync, data, signMessage, signData)
+  // were removed by the user in a previous step.
+
   return (
     <>
-      <div>
-        <h2>Account</h2>
+      <Navbar /> {/* Navbar is placed at the top, outside app-container for full-width styling */}
+      <div className="app-container"> {/* This container will hold the main content below the navbar */}
+        {/* 
+          The Account section previously here is now part of the Navbar.
+          Example:
+          <div className="account-info">
+            <h2>Account</h2>
+            ...
+          </div>
+        */}
 
-        <div>
-          Status: {account.status}
-          <br />
-          Sub Account Address: {JSON.stringify(account.addresses)}
-          <br />
-          ChainId: {account.chainId}
-        </div>
+        {/* 
+          The Connect section previously here is now part of the Navbar.
+          Example:
+          <div className="connect-section">
+            <h2>Connect</h2>
+            ...
+          </div>
+        */}
 
-        {account.status === 'connected' && (
-          <button type="button" onClick={() => disconnect()}>
-            Disconnect
+        {/* 
+          The Send Transaction and Sign Message sections were removed by the user.
+          Example:
+          <div>Send Transaction</div>
+          <button type="button" onClick={async () => sendTransactionAsync({...})}>
+            Send Transaction
           </button>
-        )}
-      </div>
+          ...
+          <div>Sign Message</div>
+          <button type="button" onClick={() => signMessage({...})}>
+            Sign Message
+          </button>
+          ...
+        */}
 
-      <div>
-        <h2>Connect</h2>
-        {connectors
-          .filter((connector) => connector.name === 'Coinbase Wallet')
-          .map((connector) => (
-            <button
-              key={connector.uid}
-              onClick={() => connect({ connector })}
-              type="button"
-            >
-              Sign in with Smart Wallet
-            </button>
-          ))}
-        <div>{status}</div>
-        <div>{error?.message}</div>
-        <div>Send Transaction</div>
-        <button type="button" onClick={async () => sendTransactionAsync({
-          to: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
-          value: parseEther('0.001'),
-        })}>
-          Send Transaction
-        </button>
-        <div>{data && "Transaction sent successfully! 🎉"}</div>
-        <div>{data}</div>
-
-        <div>Sign Message</div>
-        <button 
-          type="button" 
-          onClick={() => signMessage({ message: 'Hello World' })}
-        >
-          Sign Message
-        </button>
-        <div>{signData}</div>
+        <div className="mini-game-container"> 
+          <MiniGame />
+        </div>
       </div>
     </>
   )
