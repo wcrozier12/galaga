@@ -476,7 +476,7 @@ export function MiniGame() {
   );
 }
 type EventLogProps = {
-  callsIds: string[];
+  enemyIds: number[];
 };
 
 function EventLog({ enemyIds }: EventLogProps) {
@@ -492,7 +492,7 @@ function EventLog({ enemyIds }: EventLogProps) {
           </p>
         ) : (
             
-            enemyIds.map((enemyId: string) => <TransactionHash key={enemyId} enemyId={enemyId} />)
+            enemyIds.map((enemyId: number) => <TransactionHash key={enemyId} enemyId={enemyId} />)
             
         )}
       </div>
@@ -501,7 +501,7 @@ function EventLog({ enemyIds }: EventLogProps) {
 }
 
 type TransactionHashProps = {
-  callsId: string;
+  enemyId: number;
 };
 
 function TransactionHash({ enemyId }: TransactionHashProps) {
