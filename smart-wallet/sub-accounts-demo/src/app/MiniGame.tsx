@@ -447,7 +447,7 @@ export function MiniGame() {
   const resetEnemyId = useCallback(() => {
     setEnemyIds([]);
   }, []);
-  const [enemyIds, setEnemyIds] = useState<string[]>([]);
+  const [enemyIds, setEnemyIds] = useState<number[]>([]);
   const { sendTransactionAsync } = useSendTransaction()
   
   const handleEnemyHit = useCallback(
